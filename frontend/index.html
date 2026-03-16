@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+  <title>profilo.ai</title>
+</head>
+<body>
+
+  <div class="app-shell">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-top">
+        <div class="brand">
+          <div class="brand-orb"></div>
+          <span class="brand-name">Profilo<span class="brand-dot"> AI</span></span>
+        </div>
+        <button class="new-chat-btn" onclick="location.reload()">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          New chat
+        </button>
+        <a href="create.html" class="suggestion-chip">Add your profile</a>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-label">Try asking</div>
+        <div class="sidebar-suggestions">
+          <div class="suggestion-chip" onclick="externalSubmit('Find me a React developer')">Find me a React developer</div>
+          <div class="suggestion-chip" onclick="externalSubmit('I need a logo designer')">I need a logo designer</div>
+          <div class="suggestion-chip" onclick="externalSubmit('Career advice for freshers')">Career advice for freshers</div>
+          <div class="suggestion-chip" onclick="externalSubmit('Help with my resume')">Help with my resume</div>
+          <div class="suggestion-chip" onclick="externalSubmit('Mock interview practice')">Mock interview practice</div>
+        </div>
+      </div>
+
+      <div class="sidebar-footer">Profilo AI · RAG powered</div>
+    </aside>
+
+    <!-- Main -->
+    <main class="main">
+
+      <header class="topbar">
+        <div class="topbar-model">
+          <span class="model-dot" id="model-dot"></span>profilo-1
+        </div>
+        <div class="topbar-tag">Expert Finder</div>
+      </header>
+
+      <!-- Status banner — shown when server is waking/loading -->
+      <div id="status-banner" class="status-banner hidden">
+        <div class="status-banner-inner">
+          <div class="status-spinner"></div>
+          <span id="status-text">Checking server status...</span>
+        </div>
+      </div>
+
+      <div class="chat-area" id="prompt-container">
+        <div class="intro-section" id="intro-section">
+          <p class="intro-eyebrow">Hello there</p>
+          <h1 class="intro-heading">What can I help<br/><em>you with today?</em></h1>
+          <p class="intro-sub">I find freelance experts and mentors tailored to your needs — just ask.</p>
+          <div id="topics-container" class="topics-container"></div>
+        </div>
+      </div>
+
+      <div class="input-area" id="input-wrapper">
+        <div class="input-box">
+          <input type="text" id="search-input" class="search-input" placeholder="Message Profilo AI..." autocomplete="off"/>
+          <button class="search-btn" id="search-btn" aria-label="Send">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+          </button>
+        </div>
+        <p class="input-hint">Profilo AI can make mistakes. Always verify expert profiles before engaging.</p>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

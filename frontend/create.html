@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+  <title>Create Profile · Profilo AI</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:          #f5f2ee;
+      --surface:     #faf8f5;
+      --border:      #e4ddd4;
+      --border-dark: #cec5b8;
+      --accent:      #c96a3a;
+      --accent-light:rgba(201,106,58,0.10);
+      --accent-mid:  rgba(201,106,58,0.22);
+      --text-1:      #1a1714;
+      --text-2:      #5c5448;
+      --text-3:      #9c9086;
+      --text-4:      #c4bdb5;
+      --success-bg:  #e8f9ee;
+      --success-border: #86e0a8;
+      --success-text:#1a5c35;
+      --error-bg:    #fef2f2;
+      --error-border:#fca5a5;
+      --error-text:  #991b1b;
+      --radius:      14px;
+      --font:        'DM Sans', sans-serif;
+      --serif:       'DM Serif Display', serif;
+      --shadow:      0 4px 24px rgba(0,0,0,0.08);
+    }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text-1);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Topbar ── */
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 40px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .brand-orb {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: conic-gradient(from 180deg, var(--accent) 0%, #e8a87c 40%, #c96a3a 100%);
+      box-shadow: 0 0 0 3px var(--accent-light);
+      flex-shrink: 0;
+    }
+
+    .brand-name {
+      font-family: var(--serif);
+      font-size: 18px;
+      color: var(--text-1);
+      letter-spacing: -0.3px;
+    }
+
+    .brand-name span { color: var(--accent); }
+
+    .back-link {
+      font-size: 13px;
+      color: var(--text-3);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: color 0.15s;
+    }
+
+    .back-link:hover { color: var(--accent); }
+
+    /* ── Page ── */
+    .page {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      padding: 48px 24px 64px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 40px 44px;
+      width: 100%;
+      max-width: 620px;
+      box-shadow: var(--shadow);
+    }
+
+    .card-header {
+      margin-bottom: 32px;
+    }
+
+    .card-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.4px;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .card-title {
+      font-family: var(--serif);
+      font-size: 28px;
+      letter-spacing: -0.6px;
+      color: var(--text-1);
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+
+    .card-sub {
+      font-size: 14px;
+      color: var(--text-3);
+      font-weight: 300;
+      line-height: 1.6;
+    }
+
+    /* ── Form ── */
+    .form { display: flex; flex-direction: column; gap: 20px; }
+
+    .field { display: flex; flex-direction: column; gap: 6px; }
+
+    .field-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    label {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-2);
+    }
+
+    label span {
+      color: var(--accent);
+      margin-left: 2px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 11px 14px;
+      font-size: 14px;
+      font-family: var(--font);
+      background: var(--bg);
+      border: 1.5px solid var(--border-dark);
+      border-radius: 10px;
+      color: var(--text-1);
+      outline: none;
+      transition: border-color 0.18s, box-shadow 0.18s;
+      resize: none;
+    }
+
+    input::placeholder, textarea::placeholder { color: var(--text-4); }
+
+    input:focus, textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-light);
+    }
+
+    textarea { height: 90px; line-height: 1.6; }
+
+    .field-hint {
+      font-size: 11.5px;
+      color: var(--text-4);
+      margin-top: 2px;
+    }
+
+    /* ── Submit button ── */
+    .submit-btn {
+      width: 100%;
+      padding: 13px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 14.5px;
+      font-weight: 600;
+      font-family: var(--font);
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: background 0.18s, transform 0.12s;
+      margin-top: 6px;
+    }
+
+    .submit-btn:hover:not(:disabled) {
+      background: #b55a2e;
+      transform: translateY(-1px);
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* Spinner inside button */
+    .btn-spinner {
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255,255,255,0.4);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      display: none;
+    }
+
+    .submit-btn.loading .btn-spinner { display: block; }
+    .submit-btn.loading .btn-text { opacity: 0.7; }
+
+    /* ── Alert ── */
+    .alert {
+      padding: 14px 18px;
+      border-radius: 10px;
+      font-size: 13.5px;
+      font-weight: 500;
+      display: none;
+      align-items: flex-start;
+      gap: 10px;
+      line-height: 1.5;
+    }
+
+    .alert.show { display: flex; animation: fadeUp 0.3s ease both; }
+
+    .alert.success {
+      background: var(--success-bg);
+      border: 1px solid var(--success-border);
+      color: var(--success-text);
+    }
+
+    .alert.error {
+      background: var(--error-bg);
+      border: 1px solid var(--error-border);
+      color: var(--error-text);
+    }
+
+    .alert-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+
+    /* ── Divider ── */
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 4px 0;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    @media (max-width: 560px) {
+      .card { padding: 28px 20px; }
+      .field-row { grid-template-columns: 1fr; }
+      .topbar { padding: 14px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="topbar">
+    <a href="index.html" class="brand">
+      <div class="brand-orb"></div>
+      <span class="brand-name">Profilo<span> AI</span></span>
+    </a>
+    <a href="index.html" class="back-link">
+      ← Back to chat
+    </a>
+  </header>
+
+  <main class="page">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-eyebrow">Expert Onboarding</div>
+        <h1 class="card-title">Create your profile</h1>
+        <p class="card-sub">Fill in your details and you'll be discoverable by users looking for experts like you.</p>
+      </div>
+
+      <!-- Alert box -->
+      <div class="alert" id="alert">
+        <span class="alert-icon" id="alert-icon"></span>
+        <span id="alert-text"></span>
+      </div>
+
+      <div class="divider" style="margin-bottom:24px; display:none" id="divider"></div>
+
+      <form class="form" id="profile-form">
+
+        <div class="field-row">
+          <div class="field">
+            <label for="name">Full Name <span>*</span></label>
+            <input type="text" id="name" placeholder="e.g. Rahul Sharma" required/>
+          </div>
+          <div class="field">
+            <label for="headline">Headline <span>*</span></label>
+            <input type="text" id="headline" placeholder="e.g. Backend Developer" required/>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="skills">Skills <span>*</span></label>
+          <input type="text" id="skills" placeholder="e.g. Node.js, React, Python, SQL" required/>
+          <span class="field-hint">Comma-separated list of your key skills</span>
+        </div>
+
+        <div class="field">
+          <label for="short_description">Short Description <span>*</span></label>
+          <textarea id="short_description" placeholder="1–2 sentences about what you do and who you help..." required></textarea>
+        </div>
+
+        <div class="field">
+          <label for="long_description">Long Description <span>*</span></label>
+          <textarea id="long_description" placeholder="2–3 sentences about your experience, background and expertise..." required></textarea>
+        </div>
+
+        <div class="field">
+          <label for="contact">Contact URL <span>*</span></label>
+          <input type="url" id="contact" placeholder="https://linkedin.com/in/yourname" required/>
+          <span class="field-hint">LinkedIn, portfolio, or any contact link</span>
+        </div>
+
+        <button type="submit" class="submit-btn" id="submit-btn">
+          <div class="btn-spinner"></div>
+          <span class="btn-text">Create Profile</span>
+        </button>
+
+      </form>
+    </div>
+  </main>
+
+  <script>
+const API_BASE =
+  location.hostname === 'localhost' || location.hostname === '127.0.0.1'
+    ? 'http://localhost:5000'
+    : 'https://your-render-backend.onrender.com';
+
+    const form      = document.getElementById('profile-form');
+    const submitBtn = document.getElementById('submit-btn');
+    const alert     = document.getElementById('alert');
+    const alertText = document.getElementById('alert-text');
+    const alertIcon = document.getElementById('alert-icon');
+    const divider   = document.getElementById('divider');
+
+    function showAlert(type, message) {
+      alert.className = `alert ${type} show`;
+      alertIcon.textContent = type === 'success' ? '✅' : '⚠️';
+      alertText.textContent = message;
+      divider.style.display = 'block';
+      alert.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function hideAlert() {
+      alert.className = 'alert';
+      divider.style.display = 'none';
+    }
+
+    function setLoading(state) {
+      submitBtn.disabled = state;
+      submitBtn.classList.toggle('loading', state);
+      submitBtn.querySelector('.btn-text').textContent = state ? 'Creating profile...' : 'Create Profile';
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      hideAlert();
+
+      const payload = {
+        name:              document.getElementById('name').value.trim(),
+        headline:          document.getElementById('headline').value.trim(),
+        skills:            document.getElementById('skills').value.trim(),
+        short_description: document.getElementById('short_description').value.trim(),
+        long_description:  document.getElementById('long_description').value.trim(),
+        contact:           document.getElementById('contact').value.trim(),
+      };
+
+      setLoading(true);
+
+      try {
+        const res  = await fetch(`${API_BASE}/create-profile`, {
+          method:  'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body:    JSON.stringify(payload),
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+          showAlert('success', `🎉 ${data.message} Your profile is now live and searchable.`);
+          form.reset();
+        } else {
+          showAlert('error', data.error || 'Something went wrong. Please try again.');
+        }
+      } catch (err) {
+        showAlert('error', 'Could not reach the server. Please check your connection.');
+      } finally {
+        setLoading(false);
+      }
+    });
+  </script>
+
+</body>
+</html>
