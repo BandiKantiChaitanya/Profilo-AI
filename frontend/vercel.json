@@ -1,7 +1,15 @@
 {
   "routes": [
     {
-      "src": "/(.*)",
+      "src": "/(style\\.css|script\\.js|screenshots/.*)$",
+      "dest": "/$1"
+    },
+    {
+      "src": "/create\\.html",
+      "dest": "/create.html"
+    },
+    {
+      "src": "/",
       "dest": "/index.html"
     }
   ]
