@@ -19,7 +19,7 @@ const statusDot       = document.getElementById('status-dot');
 const API_BASE =
   location.hostname === 'localhost' || location.hostname === '127.0.0.1'
     ? 'http://localhost:5000'
-    : 'https://your-render-backend.onrender.com';
+    : 'https://profilo-ai.onrender.com';
 
 
 let serverOnline    = false;   

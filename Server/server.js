@@ -216,7 +216,7 @@ app.post('/chat', async (req, res) => {
     res.json({ reply });
 
   } catch (err) {
-    console.error('❌ Error:', err.message);
+    console.error('❌ Gemini Error:', err.message);
     res.status(500).json({ error: 'Internal server error. Please try again.' });
   }
 });
